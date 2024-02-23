@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Math Trainer</title>
+    <script type="module">
+        const answer = document.querySelector("#answer");
+        const number_a = document.querySelector("#number-a");
+        const number_b = document.querySelector("#number-b");
+        let a = 0;
+        let b = 0;
+
+        // Function copied from mdn
+        function getRandomIntInclusive(min, max) {
+            const minCeiled = Math.ceil(min);
+            const maxFloored = Math.floor(max);
+            return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+        }
+
+        function update() {
+            a = getRandomIntInclusive(1, 9);
+            b = getRandomIntInclusive(1, 9);
+
+            number_a.innerHTML = a;
+            number_b.innerHTML = b;
+        }
+
+        function check() {
+            if (answer.value == `${a + b}`) {
+                update();
+                answer.value = "";
+            }
+        }
+
+        update();
+        answer.addEventListener("keyup", check);
+    </script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: black;
+            color: lightcyan;
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 3rem;
+        }
+
+        input {
+            border: 0;
+            background-color: black;
+            border-radius: 0.25rem;
+            max-width: 6rem;
+            color: lightcoral;
+            font-size: 3rem;
+            font-weight: bolder;
+            appearance: none;
+            -moz-appearance: none;
+        }
+
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        *:focus {
+            outline-width: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Mental Math Trainer</h1>
+        <p>
+            <span id="number-a"></span>
+            +
+            <span id="number-b"></span>
+            =
+            <input type="number" name="answer" id="answer" onblur="this.focus()" autofocus>
+        </p>
+    </div>
+</body>
+
+</html>
